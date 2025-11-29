@@ -55,7 +55,46 @@
             <div class="fleet-cards" id="fleetCardsContainer"></div>
         </div>
     </div>
+  <script>
+    let fleetData = [];
+    function renderFleetCards(vehiclesToRender){
+        const container = document.getElementById('fleetCardsContainer');
+        container.innerHTML='';
+        vehiclesToRender.forEach(vehicle =>{
+            const card = document.createElement('div');
+            card.className='fleet-card';
+            card.setAttribute('data-regno',vehicle.regNo);
+            card.innerHTML = `
+               <h4>Reg No: ${vehicle.regNo}</h4>
+               <p><strong>Category:</strong> ${vehicle.category}</p>
+                <p><strong>Driver Name:</strong> ${vehicle.driverName}</p>
+                <p><strong>Availability:</strong> ${vehicle.isAvailable}</p>
+                <img src="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/5e80fcb6-3f8e-480c-945b-30a5359eb40e/JNmYjkVr3WOjsrbu.png" alt="Vehicle Image" width="200">
+                <button onClick="updateDriver('${vehicle.regNo}')">Update Driver</button>
+                <button onClick="changeAvailability('${vehicle.regNo}')">Change Availability</button>
+                <button onClick="deleteVehicle('${vehicle.regNo}')">Delete Vehicle</button>
+                `;
+        })
+    }
+    function updateDriver(regNo){
+        const newDriverName=prompt("Enter New Driver Name:");
+        if(newDriverName !== null){
+            const trimmedName=newDriverName.trim();
+            if(trimmedName === " "){
+                alert("Driver name cannot be empty.");
+                return;
+            }
+            const vehicle= fleetData.find(v => v.regNo === regNo);
+            if(vehicle){
+                vehicle.driverName=trimmedName;
+        document.getElementById(`driverName-${regNo}`).innerText=trimmedName;
+        alert("Driver name updated successfully.");
+            }
 
+        }
+    }
     
+  </script>
+
 </body>
 </html>
