@@ -4,8 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            
+        }
+        .navbar{
+            background-color: rgb(216, 216, 153);
+            color: black;
+            padding:10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .app-container{
+            display: flex;;
+        }
+        .sidebar{
+            width:300px;
+            height:700px;
+            padding: 10px;
+            background-color: rgb(142, 206, 206);
+
+        }
+        .main-content{
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .fleet-cards{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 20px;
+        }
+        .card{
+            background: white;
+            padding:15px;
+            border-radius: 5px;
+
+        }
+        .card button{
+            margin-top: 10px;
+            margin-right: 5px;
+            padding: 8px;
+        }
+        fleet-form input, .fleet-form select, .fleet-form button{
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        .category-select{
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
+
     <div class="navbar">
         <h1>Admin Dashboard</h1>
         <div>
@@ -62,18 +116,19 @@
         container.innerHTML='';
         vehiclesToRender.forEach(vehicle =>{
             const card = document.createElement('div');
-            card.className='fleet-card';
+            card.className='card';
             card.setAttribute('data-regno',vehicle.regNo);
             card.innerHTML = `
                <h4>Reg No: ${vehicle.regNo}</h4>
                <p><strong>Category:</strong> ${vehicle.category}</p>
                 <p><strong>Driver Name:</strong> ${vehicle.driverName}</p>
                 <p><strong>Availability:</strong> ${vehicle.isAvailable}</p>
-                <img src="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/5e80fcb6-3f8e-480c-945b-30a5359eb40e/JNmYjkVr3WOjsrbu.png" alt="Vehicle Image" width="200">
+                <img src="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/5e80fcb6-3f8e-480c-945b-30a5359eb40e/JNmYjkVr3WOjsrbu.png" alt="Vehicle Image" style="width:100%; height:150px; object-fit:cover; border-radius:5px;">
                 <button onClick="updateDriver('${vehicle.regNo}')">Update Driver</button>
                 <button onClick="changeAvailability('${vehicle.regNo}')">Change Availability</button>
                 <button onClick="deleteVehicle('${vehicle.regNo}')">Delete Vehicle</button>
                 `;
+                container.appendChild(card)
         })
     }
     function updateDriver(regNo){
@@ -147,13 +202,7 @@
         document.getElementById('AvailabilityFilter').value='ALL';
         renderFleetCards(fleetData);
     }
-    document.addEventListener('DOMcontentLoader',() =>{
-        fleetData.push(
-            {regNo: 'KA-01-AB-1234', category: 'Car', driverName: 'John Doe', isAvailable: 'Available'},
-            {regNo: 'KA-02-CD-5678', category: 'Truck', driverName: 'Jane Smith', isAvailable: 'Unavailable'},
-            {regNo: 'KA-03-EF-9012', category: 'Bus', driverName: 'Mike Johnson', isAvailable: 'Available'}
-        )
-    });
+    
   </script>
 
 </body>
