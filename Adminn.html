@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Admin Dashboard</h1>
+        <div>
+            <label for="categoryFilter">
+                category:
+            </label>
+            <select id="categoryFilter" onchange="applyFilters()">
+                <option value="ALL">All</option>
+                <option value="Auto">Auto</option>
+                <option value="Car">Car</option>
+                <option value="Truck">Truck</option>
+                <option value="Bus">Bus</option>
+            </select>
+            <label for="AvailabilityFilter">Availability:</label>
+            <select id="AvailabilityFilter" onchange="applyFilters()">
+                <option value="ALL">All</option>
+                <option value="Available">Available</option>
+                <option value="Unavailable">Unavailable</option>
+            </select>
+            <button onclick="clearFilters()">Clear Filters</button>
+    </div>  
+    </div>
+
+    <div class="app-container">
+        <div class="sidebar">
+            <h2>Add New</h2>
+            <form class="fleet-form" id="addFleetForm">
+                <input type="text" id="regNo" placeholder="Reg No of Vehicle" required>
+
+                <select id="category" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Auto">Auto</option>
+                    <option value="Car">Car</option>
+                    <option value="Truck">Truck</option>
+                    <option value="Bus">Bus</option>
+                </select>
+                <input type="text" id="driverName" placeholder="driverName" required>
+                <select id="isAvailable" required>
+                    <option value="Available">Available</option>
+                    <option value="Unavailable">Unavailable</option>
+                </select>
+                <button type="submit">Add Vehicle</button>
+            </form>
+        </div>
+        <div class="main-content">
+            <h2>Vehicle List</h2>
+            <div class="fleet-cards" id="fleetCardsContainer"></div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
