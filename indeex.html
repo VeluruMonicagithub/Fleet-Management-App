@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FleetManagement</title>
+</head>
+<body>
+    <div class="Login-container">
+        <h1>Login Page</h1>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="handleLogin()">Login</button>
+        </div>
+        <script>
+            function handleLogin(){
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const Valid_Email = "admin@gmail.com";
+                const Valid_Password = "admin1234";
+                if(email ===Valid_Email && password === Valid_Password){
+                    alert("Login Successful");
+                    window.location.href="admin.html";
+                }
+                else{
+                 alert("Invalid Email or Password");
+                }
+                }
+        </script>
+</body>
+</html>
