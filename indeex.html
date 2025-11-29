@@ -4,6 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FleetManagement</title>
+    <style>
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(100, 87, 87);
+            
+        }
+        .Login-container{
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+        input, button{
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button{
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="Login-container">
@@ -20,7 +52,7 @@
                 const Valid_Password = "admin1234";
                 if(email ===Valid_Email && password === Valid_Password){
                     alert("Login Successful");
-                    window.location.href="admin.html";
+                    window.location.href="Adminn.html";
                 }
                 else{
                  alert("Invalid Email or Password");
