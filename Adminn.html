@@ -93,7 +93,67 @@
 
         }
     }
-    
+    function changeAvailability(regNo){
+        const vehicle=fleetData.find(v => v.regNo === regNo);
+        if(vehicle){
+            vehicle.isAvailable = vehicle.isAvailable === "Available" ? "Unavailable" : "Available";
+            applyFilters();
+            alert("Availability status changed successfully.");
+        }
+    }
+    function deleteVehicle (regNo){
+        const isConfirmed=confirm("Are you sure you want to delete this vehicle?");
+        if(isConfirmed){
+            fleetData=fleetData.filter(v => v.regNo !== regNo);
+            applyFilters();
+            alert("Vehicle deleted successfully.");
+        }
+    }
+    document.getElementById('addFleetForm').addEventListener('submit',function(event){
+        event.preventDefault();
+        const regNo=document.getElementById('regNo').value.trim();
+        const category=document.getElementById('category').value;
+        const driverName=document.getElementById('driverName').value.trim();
+        const isAvailable=document.getElementById('isAvailable').value;
+        if(fleetData.some(v => v.regNo === regNo)){
+            alert("A vehicle with this registration number already exists.");
+            return;
+        }
+        const newVehicle={
+            regNo,
+            category,
+            driverName,
+            isAvailable
+        };
+        fleetData.push(newVehicle);
+        applyFilters();
+        document.getElementById('addFleetForm').reset();
+        alert("New vehicle added successfully.");
+    });
+    function applyFilters(){
+        const categoryFilter=document.getElementById('categoryFilter').value;
+        const availabilityFilter=document.getElementById('AvailabilityFilter').value;
+        let filteredData=fleetData;
+        if(categoryFilter !== "ALL"){
+            filteredData=filteredData.filter(v => v.category === categoryFilter);
+        }
+        if(availabilityFilter !== "ALL"){
+            filteredData=filteredData.filter(v => v.isAvailable === availabilityFilter);
+        }
+        renderFleetCards(filteredData);
+    }
+    function clearFilters(){
+        document.getElementById('categoryFilter').value='ALL';
+        document.getElementById('AvailabilityFilter').value='ALL';
+        renderFleetCards(fleetData);
+    }
+    document.addEventListener('DOMcontentLoader',() =>{
+        fleetData.push(
+            {regNo: 'KA-01-AB-1234', category: 'Car', driverName: 'John Doe', isAvailable: 'Available'},
+            {regNo: 'KA-02-CD-5678', category: 'Truck', driverName: 'Jane Smith', isAvailable: 'Unavailable'},
+            {regNo: 'KA-03-EF-9012', category: 'Bus', driverName: 'Mike Johnson', isAvailable: 'Available'}
+        )
+    });
   </script>
 
 </body>
